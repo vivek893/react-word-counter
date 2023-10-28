@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        textarea {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <label for="fontSize-input">Font size picker:</label><br>
+            <input type="range" id="fontSize-input" min="16" max="32" value="16">
+        </div>
+        <br>
+        <div>
+            <label for="char-limit-input">Character Limit:</label><br>
+            <input type="number" id="char-limit-input" value="50">
+        </div>
+        
+    </div>
+    <br>
+    <textarea id="input-text" rows="4" cols="50" placeholder="Enter words here"></textarea>
+    <br>
+    <div id="word-counter">Total numbers of words written: 0</div><br>
+    <div id="char-counter">Total number of Characters used: 0</div>
+
+    <script>
+        const inputText = document.getElementById('input-text');
+        const wordCounter = document.getElementById('word-counter');
+        const charCounter = document.getElementById('char-counter');
+        const charLimitInput = document.getElementById('char-limit-input');
+        const fontSizeInput = document.getElementById('fontSize-input');
+       
+        
+
+        // Update character limit from input
+        charLimitInput.addEventListener('input', () => {
+            const charLimit = parseInt(charLimitInput.value);
+            inputText.maxLength = charLimit;
+        });
+
+        // Update font size from input
+        fontSizeInput.addEventListener('input', () => {
+            inputText.style.fontSize = fontSizeInput.value + 'px';
+        });
+
+        inputText.addEventListener('input', () => {
+            const text = inputText.value;
+            const words = text.split(/\s+/).filter(Boolean);
+            const charCount = text.length;
+
+            wordCounter.textContent = `Words: ${words.length}`;
+            charCounter.textContent = `Characters: ${charCount}`;
+        });
+    </script>
+</body>
+</html>
